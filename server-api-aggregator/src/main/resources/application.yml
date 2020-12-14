@@ -1,0 +1,31 @@
+grpc:
+  client:
+    validator-service:
+      address: static://localhost:6565
+      negotiationType: plaintext
+
+server:
+  port: 8083
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
+  endpoint:
+    health:
+      show-details: always
+    info:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true

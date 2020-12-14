@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package validator;
+
+option java_package = "com.orange.poc.validator";
+option java_multiple_files = true;
+
+message NifRequest {
+  string nifDocument = 1;
+}
+
+message ValidatorResponse {
+  bool isValid = 1;
+}
+
+service ValidatorService {
+  // unary
+  rpc checkNifValidityUnary(NifRequest) returns (ValidatorResponse) {};
+
+  // server stream
+  rpc checkNifValidityStream(NifRequest) returns (stream ValidatorResponse) {};
+
+  // client stream
+  rpc requestNifValidity(stream NifRequest) returns (ValidatorResponse) {};
+
+  // bi-directional stream
+  rpc checkNifValidityBidirectional(stream NifRequest) returns (stream ValidatorResponse) {};
+}
